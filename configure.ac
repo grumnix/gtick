@@ -6,7 +6,7 @@ AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([config.h.in])
 AM_CONFIG_HEADER([config.h])
 
-AC_GNU_SOURCE
+AC_USE_SYSTEM_EXTENSIONS
 
 # AM_MAINTAINER_MODE([enable])
 
@@ -29,7 +29,6 @@ AC_CHECK_LIB([check], [fail_if])
 AC_CHECK_LIB([dmalloc], [dmalloc_debug])
 
 # Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS([fcntl.h libintl.h stdlib.h sys/ioctl.h unistd.h sys/time.h math.h sys/types.h stdarg.h assert.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -71,8 +70,8 @@ else
 fi
 
 # GNU gettext
-AM_GNU_GETTEXT
-AM_GNU_GETTEXT_VERSION(0.19.8)
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION(0.21)
 
 # directory containing configuration support files
 # defaults to package root
@@ -98,7 +97,6 @@ AC_SUBST(DMALLOC_LIBS)
 
 AC_CONFIG_FILES([Makefile
 		 doc/Makefile
-		 intl/Makefile
 		 po/Makefile.in
 		 src/Makefile
 		 testsuite/Makefile])
