@@ -10,8 +10,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-      in rec {
-        packages = flake-utils.lib.flattenTree rec {
+      in {
+        packages = rec {
+          default = gtick;
+
           gtick = pkgs.stdenv.mkDerivation rec {
             pname = "gtick";
             version = "0.5.5";
@@ -33,7 +35,6 @@
             ];
           };
         };
-        defaultPackage = packages.gtick;
       }
     );
 }
