@@ -17,17 +17,26 @@
           gtick = pkgs.stdenv.mkDerivation rec {
             pname = "gtick";
             version = "0.5.5";
+
             src = ./.;
+
             configureFlags = [
               "--with-sndfile"
             ];
+
+            fixupPhase = ''
+              substituteInPlace $out/share/applications/gtick.desktop \
+                --replace "/usr" "$out"
+            '';
+
             nativeBuildInputs = with pkgs; [
               pkgconfig
               autoreconfHook
               wrapGAppsHook
               flex
               bison
-            ];
+                         ];
+
             buildInputs = with pkgs; [
               gtk2
               libpulseaudio
